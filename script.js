@@ -17,19 +17,15 @@ import {
 /* ==================================================
    Firebase
    ================================================== */
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey:
-        "ここにAPIキー",
-    authDomain:
-        "ここにauthDomain",
-    projectId:
-        "ここにprojectId",
-    storageBucket:
-        "ここにstorageBucket",
-    messagingSenderId:
-        "ここにmessagingSenderId",
-    appId:
-        "ここにappId"
+    apiKey: "AIzaSyB8DRhjiburjP3jKn4wDW2dmdLi843L0go",
+    authDomain: "fridge-68cfc.firebaseapp.com",
+    projectId: "fridge-68cfc",
+    storageBucket: "fridge-68cfc.firebasestorage.app",
+    messagingSenderId: "492169932952",
+    appId: "1:492169932952:web:ba607e6e5d0db4700aa0ed",
+    measurementId: "G-66TKL6ENX8"
 };
 const firebaseApp =
     initializeApp(firebaseConfig);
