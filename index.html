@@ -2,7 +2,6 @@
 <html lang="ja">
 
 <head>
-
   <meta charset="UTF-8">
 
   <meta
@@ -12,18 +11,14 @@
 
   <title>My Fridge</title>
 
-
   <style>
 
     * {
       box-sizing: border-box;
     }
 
-
     body {
-
       margin: 0;
-
       font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -31,75 +26,47 @@
         sans-serif;
 
       background: #f5f7fa;
-
       color: #222;
-
     }
 
-
     header {
-
       background: white;
-
       padding: 16px 20px;
 
       border-bottom: 1px solid #ddd;
 
       display: flex;
-
       justify-content: space-between;
-
       align-items: center;
 
       position: sticky;
-
       top: 0;
-
       z-index: 10;
-
     }
-
 
     header h1 {
-
       margin: 0;
-
       font-size: 22px;
-
     }
-
 
     main {
-
-      max-width: 900px;
-
+      max-width: 700px;
       margin: auto;
-
       padding: 20px;
-
     }
-
 
     .hidden {
-
       display: none !important;
-
     }
 
-
     .card {
-
       background: white;
-
-      border-radius: 16px;
-
+      border-radius: 18px;
       padding: 20px;
-
       margin-bottom: 20px;
 
       box-shadow:
         0 3px 15px rgba(0, 0, 0, 0.05);
-
     }
 
 
@@ -108,191 +75,114 @@
        ========================= */
 
     .login {
-
       max-width: 420px;
-
       margin: 80px auto;
-
       text-align: center;
-
     }
-
 
     .login h1 {
-
       font-size: 32px;
-
       margin-bottom: 5px;
-
     }
-
 
     .user-buttons {
-
       display: grid;
-
       grid-template-columns: 1fr 1fr;
-
       gap: 10px;
-
       margin-top: 20px;
-
     }
 
-
     .user-button {
-
       background: #f1f3f5;
-
       color: #222;
 
       border: 2px solid transparent;
 
       padding: 18px 10px;
-
       border-radius: 14px;
 
       cursor: pointer;
-
       font-size: 16px;
-
       margin: 0;
-
     }
-
 
     .user-button.selected {
-
       border-color: #222;
-
-      background: #fff;
-
+      background: white;
     }
 
-
     .login-button {
-
       margin-top: 20px;
-
       background: #222;
-
       color: white;
-
     }
 
 
     /* =========================
-       入力フォーム
+       入力
        ========================= */
 
     input,
-    select,
     button {
-
       width: 100%;
+      padding: 13px;
 
-      padding: 12px;
-
-      border-radius: 10px;
-
+      border-radius: 11px;
       border: 1px solid #ccc;
 
       font-size: 16px;
-
     }
-
 
     button {
-
       border: none;
-
       background: #222;
-
       color: white;
-
       cursor: pointer;
-
     }
 
-
-    button:hover {
-
-      opacity: 0.85;
-
+    button:active {
+      transform: scale(0.98);
     }
-
 
     label {
-
       display: block;
-
       font-size: 14px;
-
-      margin-top: 8px;
-
-      margin-bottom: 4px;
-
       color: #555;
 
+      margin-top: 12px;
+      margin-bottom: 5px;
     }
 
 
     /* =========================
-       冷蔵庫
+       期限ボタン
        ========================= */
 
-    .fridge-section {
-
-      margin-bottom: 35px;
-
+    .date-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
 
+    .date-button {
+      background: #f1f3f5;
+      color: #222;
 
-    .fridge-section h2 {
+      text-align: left;
 
-      margin-bottom: 8px;
-
+      min-height: 65px;
+      padding: 12px;
     }
 
-
-    .capacity-label {
-
-      display: flex;
-
-      justify-content: space-between;
-
+    .date-button .date-title {
       font-size: 13px;
-
       color: #666;
-
-      margin-bottom: 5px;
-
     }
 
-
-    .progress {
-
-      height: 12px;
-
-      background: #e5e7eb;
-
-      border-radius: 999px;
-
-      overflow: hidden;
-
-      margin-bottom: 15px;
-
-    }
-
-
-    .progress-bar {
-
-      height: 100%;
-
-      background: #222;
-
-      transition: width 0.3s;
-
+    .date-button .date-value {
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 3px;
     }
 
 
@@ -301,142 +191,278 @@
        ========================= */
 
     .food {
-
       display: flex;
-
       justify-content: space-between;
-
-      align-items: center;
+      align-items: flex-start;
 
       gap: 10px;
 
       border: 1px solid #eee;
+      padding: 15px;
 
-      padding: 14px;
-
-      border-radius: 12px;
-
-      margin-bottom: 8px;
+      border-radius: 13px;
+      margin-bottom: 9px;
 
       background: white;
-
     }
-
 
     .food-name {
-
       font-weight: bold;
-
       font-size: 17px;
-
     }
 
-
     .food-info {
-
       font-size: 13px;
-
       color: #666;
 
       margin-top: 4px;
-
       line-height: 1.6;
-
     }
 
-
     .delete {
-
       width: auto;
-
       min-width: 55px;
 
       background: #eee;
-
       color: #c00;
 
       padding: 8px 12px;
-
       margin: 0;
 
       flex-shrink: 0;
-
     }
-
 
     .expired {
-
       color: #d00;
-
       font-weight: bold;
-
     }
-
 
     .warning {
-
       color: #d97706;
-
       font-weight: bold;
-
     }
-
 
     .empty {
-
       color: #999;
-
       text-align: center;
-
-      padding: 15px;
-
+      padding: 20px;
     }
-
 
     .current-user {
-
       font-size: 13px;
-
       color: #666;
-
     }
 
-
     .logout {
-
       width: auto;
-
       padding: 8px 12px;
 
       background: #eee;
-
       color: #222;
 
       margin: 0;
-
     }
 
 
-    @media (max-width: 600px) {
+    /* =========================
+       日付モーダル
+       ========================= */
+
+    .modal-background {
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(0, 0, 0, 0.45);
+
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+
+      z-index: 100;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 600px;
+
+      background: #f5f5f7;
+
+      border-radius: 22px 22px 0 0;
+
+      padding: 18px 15px 25px;
+
+      animation: modalUp 0.2s ease;
+    }
+
+    @keyframes modalUp {
+      from {
+        transform: translateY(100%);
+      }
+
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      margin-bottom: 15px;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .modal-close {
+      width: auto;
+
+      background: #ddd;
+      color: #333;
+
+      padding: 7px 12px;
+      margin: 0;
+    }
+
+
+    /* =========================
+       iOS風ホイール
+       ========================= */
+
+    .wheel-container {
+      position: relative;
+
+      display: grid;
+      grid-template-columns:
+        1.2fr
+        1fr
+        1fr;
+
+      height: 190px;
+
+      overflow: hidden;
+
+      background: #f5f5f7;
+
+      border-radius: 15px;
+    }
+
+    .wheel {
+      height: 190px;
+
+      overflow-y: scroll;
+
+      scroll-snap-type: y mandatory;
+
+      scrollbar-width: none;
+
+      -webkit-overflow-scrolling: touch;
+
+      text-align: center;
+
+      position: relative;
+    }
+
+    .wheel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .wheel-item {
+      height: 38px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      scroll-snap-align: center;
+
+      font-size: 21px;
+
+      color: #777;
+
+      user-select: none;
+    }
+
+    .wheel-item.selected {
+      color: #111;
+      font-weight: 600;
+    }
+
+    .wheel-selection {
+      position: absolute;
+
+      left: 0;
+      right: 0;
+
+      top: 76px;
+
+      height: 38px;
+
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+
+      pointer-events: none;
+    }
+
+    .wheel-fade {
+      position: absolute;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          to bottom,
+          #f5f5f7 0%,
+          rgba(245,245,247,0) 35%,
+          rgba(245,245,247,0) 65%,
+          #f5f5f7 100%
+        );
+    }
+
+
+    /* =========================
+       モーダルボタン
+       ========================= */
+
+    .modal-buttons {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 10px;
+
+      margin-top: 15px;
+    }
+
+    .clear-button {
+      background: #ddd;
+      color: #333;
+    }
+
+    .save-date-button {
+      background: #222;
+      color: white;
+    }
+
+
+    @media (max-width: 500px) {
 
       main {
-
         padding: 12px;
-
       }
 
-
-      .food {
-
-        align-items: flex-start;
-
+      .date-buttons {
+        grid-template-columns: 1fr;
       }
 
-
-      .food-name {
-
-        font-size: 16px;
-
+      .modal {
+        padding-bottom: 30px;
       }
 
     }
@@ -449,15 +475,13 @@
 <body>
 
 
-  <!-- =====================================
-       ログイン画面
-       ===================================== -->
+  <!-- =========================
+       ログイン
+       ========================= -->
 
   <div id="loginScreen">
 
-
     <div class="card login">
-
 
       <h1>🧊 My Fridge</h1>
 
@@ -465,14 +489,11 @@
         家族用冷蔵庫管理システム
       </p>
 
-
       <h3>
         誰が使いますか？
       </h3>
 
-
       <div class="user-buttons">
-
 
         <button
           class="user-button"
@@ -481,14 +502,12 @@
           👨 お父さん
         </button>
 
-
         <button
           class="user-button"
           data-user="お母さん"
         >
           👩 お母さん
         </button>
-
 
         <button
           class="user-button"
@@ -497,7 +516,6 @@
           🧑 自分
         </button>
 
-
         <button
           class="user-button"
           data-user="その他"
@@ -505,9 +523,7 @@
           👤 その他
         </button>
 
-
       </div>
-
 
       <button
         id="loginButton"
@@ -516,25 +532,22 @@
         ログイン
       </button>
 
-
     </div>
 
   </div>
 
 
 
-  <!-- =====================================
-       アプリ本体
-       ===================================== -->
+  <!-- =========================
+       アプリ
+       ========================= -->
 
   <div
     id="app"
     class="hidden"
   >
 
-
     <header>
-
 
       <div>
 
@@ -549,7 +562,6 @@
 
       </div>
 
-
       <button
         id="logoutButton"
         class="logout"
@@ -557,30 +569,31 @@
         ログアウト
       </button>
 
-
     </header>
-
 
 
     <main>
 
 
-      <!-- =================================
+      <!-- =========================
            食品追加
-           ================================= -->
+           ========================= -->
 
       <div class="card">
-
 
         <h2>
           ＋ 食品を追加
         </h2>
 
 
+        <label>
+          食品名
+        </label>
+
         <input
           id="foodName"
           type="text"
-          placeholder="食品名（例：卵）"
+          placeholder="例：卵"
         >
 
 
@@ -591,220 +604,194 @@
         <input
           id="quantity"
           type="number"
-          min="1"
+          min="0"
           value="1"
         >
 
 
         <label>
-          保存場所
-        </label>
-
-        <select id="location">
-
-          <option value="冷蔵室">
-            🧊 冷蔵室
-          </option>
-
-          <option value="冷凍室">
-            ❄️ 冷凍室
-          </option>
-
-          <option value="野菜室">
-            🥬 野菜室
-          </option>
-
-        </select>
-
-
-        <label>
-          賞味期限
+          グラム数
         </label>
 
         <input
-          id="bestBefore"
-          type="date"
+          id="grams"
+          type="number"
+          min="0"
+          placeholder="例：300"
         >
 
 
         <label>
-          消費期限
+          期限
         </label>
 
-        <input
-          id="useBy"
-          type="date"
+
+        <div class="date-buttons">
+
+
+          <button
+            id="bestBeforeButton"
+            class="date-button"
+          >
+
+            <div class="date-title">
+              賞味期限
+            </div>
+
+            <div
+              id="bestBeforeText"
+              class="date-value"
+            >
+              未設定
+            </div>
+
+          </button>
+
+
+          <button
+            id="useByButton"
+            class="date-button"
+          >
+
+            <div class="date-title">
+              消費期限
+            </div>
+
+            <div
+              id="useByText"
+              class="date-value"
+            >
+              未設定
+            </div>
+
+          </button>
+
+
+        </div>
+
+
+        <button
+          id="addButton"
+          style="margin-top:15px;"
         >
-
-
-        <label>
-          大きさ
-        </label>
-
-        <select id="size">
-
-          <option value="small">
-            小
-          </option>
-
-          <option value="medium">
-            中
-          </option>
-
-          <option value="large">
-            大
-          </option>
-
-        </select>
-
-
-        <button id="addButton">
           冷蔵庫に追加
         </button>
-
 
       </div>
 
 
 
-      <!-- =================================
-           冷蔵室
-           ================================= -->
+      <!-- =========================
+           食品一覧
+           ========================= -->
 
-      <section class="fridge-section">
-
-
-        <h2>
-          🧊 冷蔵室
-        </h2>
-
-
-        <div class="capacity-label">
-
-          <span>
-            推定充満率
-          </span>
-
-          <span id="coldRate">
-            0%
-          </span>
-
-        </div>
-
-
-        <div class="progress">
-
-          <div
-            id="coldBar"
-            class="progress-bar"
-            style="width: 0%"
-          ></div>
-
-        </div>
-
-
-        <div id="coldFoods"></div>
-
-
-      </section>
-
-
-
-      <!-- =================================
-           冷凍室
-           ================================= -->
-
-      <section class="fridge-section">
-
+      <div class="card">
 
         <h2>
-          ❄️ 冷凍室
+          🧊 冷蔵庫の中身
         </h2>
 
+        <div id="foods"></div>
 
-        <div class="capacity-label">
-
-          <span>
-            推定充満率
-          </span>
-
-          <span id="freezerRate">
-            0%
-          </span>
-
-        </div>
-
-
-        <div class="progress">
-
-          <div
-            id="freezerBar"
-            class="progress-bar"
-            style="width: 0%"
-          ></div>
-
-        </div>
-
-
-        <div id="freezerFoods"></div>
-
-
-      </section>
-
-
-
-      <!-- =================================
-           野菜室
-           ================================= -->
-
-      <section class="fridge-section">
-
-
-        <h2>
-          🥬 野菜室
-        </h2>
-
-
-        <div class="capacity-label">
-
-          <span>
-            推定充満率
-          </span>
-
-          <span id="vegetableRate">
-            0%
-          </span>
-
-        </div>
-
-
-        <div class="progress">
-
-          <div
-            id="vegetableBar"
-            class="progress-bar"
-            style="width: 0%"
-          ></div>
-
-        </div>
-
-
-        <div id="vegetableFoods"></div>
-
-
-      </section>
+      </div>
 
 
     </main>
-
 
   </div>
 
 
 
-  <!-- =====================================
+  <!-- =========================
+       日付モーダル
+       ========================= -->
+
+  <div
+    id="dateModal"
+    class="modal-background hidden"
+  >
+
+    <div class="modal">
+
+
+      <div class="modal-header">
+
+        <h2 id="modalTitle">
+          賞味期限
+        </h2>
+
+        <button
+          id="closeModal"
+          class="modal-close"
+        >
+          閉じる
+        </button>
+
+      </div>
+
+
+      <div class="wheel-container">
+
+
+        <!-- 年 -->
+
+        <div
+          id="yearWheel"
+          class="wheel"
+        ></div>
+
+
+        <!-- 月 -->
+
+        <div
+          id="monthWheel"
+          class="wheel"
+        ></div>
+
+
+        <!-- 日 -->
+
+        <div
+          id="dayWheel"
+          class="wheel"
+        ></div>
+
+
+        <div class="wheel-selection"></div>
+
+        <div class="wheel-fade"></div>
+
+      </div>
+
+
+      <div class="modal-buttons">
+
+        <button
+          id="clearDate"
+          class="clear-button"
+        >
+          期限なし
+        </button>
+
+        <button
+          id="saveDate"
+          class="save-date-button"
+        >
+          設定
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================
        Firebase
-       ===================================== -->
+       ========================= -->
 
   <script type="module">
 
@@ -829,64 +816,70 @@
       "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 
-
-    // =====================================
-    // Firebase設定
-    // =====================================
+    /* =========================
+       Firebase設定
+       ========================= */
 
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyB8DRhjiburjP3jKn4wDW2dmdLi843L0go",
-  authDomain: "fridge-68cfc.firebaseapp.com",
-  projectId: "fridge-68cfc",
-  storageBucket: "fridge-68cfc.firebasestorage.app",
-  messagingSenderId: "492169932952",
-  appId: "1:492169932952:web:ba607e6e5d0db4700aa0ed",
-  measurementId: "G-66TKL6ENX8"
-};
+    const firebaseConfig = {
+      apiKey: "AIzaSyB8DRhjiburjP3jKn4wDW2dmdLi843L0go",
+      authDomain: "fridge-68cfc.firebaseapp.com",
+      projectId: "fridge-68cfc",
+      storageBucket: "fridge-68cfc.firebasestorage.app",
+      messagingSenderId: "492169932952",
+      appId: "1:492169932952:web:ba607e6e5d0db4700aa0ed",
+      measurementId: "G-66TKL6ENX8"
+    };
 
-
-
-    // Firebase開始
 
     const app =
       initializeApp(firebaseConfig);
-
 
     const db =
       getFirestore(app);
 
 
 
-    // =====================================
-    // 現在ログインしている人
-    // =====================================
+    /* =========================
+       現在のユーザー
+       ========================= */
 
     let currentUser =
-      localStorage.getItem("fridgeUser");
+      localStorage.getItem(
+        "fridgeUser"
+      );
+
+
+    let selectedBestBefore = null;
+
+    let selectedUseBy = null;
 
 
 
-    // =====================================
-    // HTML要素
-    // =====================================
+    /* =========================
+       HTML
+       ========================= */
 
     const loginScreen =
-      document.getElementById("loginScreen");
-
+      document.getElementById(
+        "loginScreen"
+      );
 
     const appScreen =
-      document.getElementById("app");
-
+      document.getElementById(
+        "app"
+      );
 
     const currentUserText =
-      document.getElementById("currentUser");
+      document.getElementById(
+        "currentUser"
+      );
 
 
 
-    // =====================================
-    // 名前選択
-    // =====================================
+    /* =========================
+       ユーザー選択
+       ========================= */
 
     const userButtons =
       document.querySelectorAll(
@@ -896,27 +889,20 @@ const firebaseConfig = {
 
     userButtons.forEach(button => {
 
-
       button.addEventListener(
         "click",
         () => {
 
-
-          // 他の選択を解除
-
           userButtons.forEach(
-            b => b.classList.remove(
-              "selected"
-            )
+            b =>
+              b.classList.remove(
+                "selected"
+              )
           );
-
-
-          // 選択
 
           button.classList.add(
             "selected"
           );
-
 
           currentUser =
             button.dataset.user;
@@ -928,16 +914,15 @@ const firebaseConfig = {
 
 
 
-    // =====================================
-    // ログイン
-    // =====================================
+    /* =========================
+       ログイン
+       ========================= */
 
     document
       .getElementById("loginButton")
       .addEventListener(
         "click",
         () => {
-
 
           if (!currentUser) {
 
@@ -949,12 +934,10 @@ const firebaseConfig = {
 
           }
 
-
           localStorage.setItem(
             "fridgeUser",
             currentUser
           );
-
 
           showApp();
 
@@ -963,26 +946,18 @@ const firebaseConfig = {
 
 
 
-    // =====================================
-    // アプリ表示
-    // =====================================
-
     function showApp() {
-
 
       loginScreen.classList.add(
         "hidden"
       );
 
-
       appScreen.classList.remove(
         "hidden"
       );
 
-
       currentUserText.textContent =
         `ログイン中：${currentUser}`;
-
 
       startRealtimeListener();
 
@@ -990,9 +965,9 @@ const firebaseConfig = {
 
 
 
-    // =====================================
-    // ログアウト
-    // =====================================
+    /* =========================
+       ログアウト
+       ========================= */
 
     document
       .getElementById("logoutButton")
@@ -1000,11 +975,9 @@ const firebaseConfig = {
         "click",
         () => {
 
-
           localStorage.removeItem(
             "fridgeUser"
           );
-
 
           location.reload();
 
@@ -1012,10 +985,6 @@ const firebaseConfig = {
       );
 
 
-
-    // =====================================
-    // 既にログイン済みなら自動ログイン
-    // =====================================
 
     if (currentUser) {
 
@@ -1025,20 +994,624 @@ const firebaseConfig = {
 
 
 
-    // =====================================
-    // 食品追加
-    // =====================================
+    /* =========================
+       日付関係
+       ========================= */
+
+    let editingDateType = null;
+
+
+
+    const dateModal =
+      document.getElementById(
+        "dateModal"
+      );
+
+
+    const modalTitle =
+      document.getElementById(
+        "modalTitle"
+      );
+
+
+    const yearWheel =
+      document.getElementById(
+        "yearWheel"
+      );
+
+
+    const monthWheel =
+      document.getElementById(
+        "monthWheel"
+      );
+
+
+    const dayWheel =
+      document.getElementById(
+        "dayWheel"
+      );
+
+
+
+    /* =========================
+       今日＋2日
+       ========================= */
+
+    function getDefaultDate() {
+
+      const date =
+        new Date();
+
+      date.setHours(
+        0,
+        0,
+        0,
+        0
+      );
+
+      date.setDate(
+        date.getDate() + 2
+      );
+
+      return date;
+
+    }
+
+
+
+    /* =========================
+       日付モーダルを開く
+       ========================= */
+
+    function openDateModal(type) {
+
+      editingDateType = type;
+
+
+      modalTitle.textContent =
+        type === "bestBefore"
+          ? "賞味期限"
+          : "消費期限";
+
+
+      let currentDate;
+
+
+      if (
+        type === "bestBefore" &&
+        selectedBestBefore
+      ) {
+
+        currentDate =
+          parseDate(selectedBestBefore);
+
+      } else if (
+        type === "useBy" &&
+        selectedUseBy
+      ) {
+
+        currentDate =
+          parseDate(selectedUseBy);
+
+      } else {
+
+        currentDate =
+          getDefaultDate();
+
+      }
+
+
+      createWheels(currentDate);
+
+
+      dateModal.classList.remove(
+        "hidden"
+      );
+
+    }
+
+
+
+    /* =========================
+       ホイール生成
+       ========================= */
+
+    function createWheels(date) {
+
+      const year =
+        date.getFullYear();
+
+      const month =
+        date.getMonth() + 1;
+
+      const day =
+        date.getDate();
+
+
+      yearWheel.innerHTML = "";
+
+      monthWheel.innerHTML = "";
+
+      dayWheel.innerHTML = "";
+
+
+
+      // 年
+
+      for (
+        let y = year - 5;
+        y <= year + 10;
+        y++
+      ) {
+
+        addWheelItem(
+          yearWheel,
+          y,
+          `${y}年`,
+          y === year
+        );
+
+      }
+
+
+
+      // 月
+
+      for (
+        let m = 1;
+        m <= 12;
+        m++
+      ) {
+
+        addWheelItem(
+          monthWheel,
+          m,
+          `${m}月`,
+          m === month
+        );
+
+      }
+
+
+
+      // 日
+
+      const maxDay =
+        new Date(
+          year,
+          month,
+          0
+        ).getDate();
+
+
+      for (
+        let d = 1;
+        d <= maxDay;
+        d++
+      ) {
+
+        addWheelItem(
+          dayWheel,
+          d,
+          `${d}日`,
+          d === day
+        );
+
+      }
+
+
+      // 選択位置へ移動
+
+      setTimeout(() => {
+
+        scrollToSelected(
+          yearWheel
+        );
+
+        scrollToSelected(
+          monthWheel
+        );
+
+        scrollToSelected(
+          dayWheel
+        );
+
+      }, 10);
+
+    }
+
+
+
+    function addWheelItem(
+      wheel,
+      value,
+      text,
+      selected
+    ) {
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+
+      item.className =
+        "wheel-item";
+
+
+      if (selected) {
+
+        item.classList.add(
+          "selected"
+        );
+
+      }
+
+
+      item.dataset.value =
+        value;
+
+
+      item.textContent =
+        text;
+
+
+      wheel.appendChild(
+        item
+      );
+
+    }
+
+
+
+    function scrollToSelected(
+      wheel
+    ) {
+
+      const selected =
+        wheel.querySelector(
+          ".selected"
+        );
+
+
+      if (!selected) return;
+
+
+      selected.scrollIntoView({
+        block: "center"
+      });
+
+    }
+
+
+
+    /* =========================
+       ホイールから値取得
+       ========================= */
+
+    function getWheelValue(
+      wheel
+    ) {
+
+      const items =
+        [
+          ...wheel.children
+        ];
+
+
+      const center =
+        wheel.getBoundingClientRect()
+          .top
+        +
+        wheel.clientHeight / 2;
+
+
+      let closest = null;
+
+      let distance =
+        Infinity;
+
+
+      items.forEach(item => {
+
+        const rect =
+          item.getBoundingClientRect();
+
+        const itemCenter =
+          rect.top +
+          rect.height / 2;
+
+        const d =
+          Math.abs(
+            center -
+            itemCenter
+          );
+
+
+        if (d < distance) {
+
+          distance = d;
+
+          closest = item;
+
+        }
+
+      });
+
+
+      return Number(
+        closest.dataset.value
+      );
+
+    }
+
+
+
+    /* =========================
+       日付モーダル
+       ========================= */
 
     document
-      .getElementById("addButton")
+      .getElementById(
+        "bestBeforeButton"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          openDateModal(
+            "bestBefore"
+          );
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "useByButton"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          openDateModal(
+            "useBy"
+          );
+
+        }
+      );
+
+
+
+    document
+      .getElementById(
+        "closeModal"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          dateModal.classList.add(
+            "hidden"
+          );
+
+        }
+      );
+
+
+
+    /* =========================
+       日付設定
+       ========================= */
+
+    document
+      .getElementById(
+        "saveDate"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          const year =
+            getWheelValue(
+              yearWheel
+            );
+
+          const month =
+            getWheelValue(
+              monthWheel
+            );
+
+          const day =
+            getWheelValue(
+              dayWheel
+            );
+
+
+          const date =
+            createDateString(
+              year,
+              month,
+              day
+            );
+
+
+          if (
+            editingDateType ===
+            "bestBefore"
+          ) {
+
+            selectedBestBefore =
+              date;
+
+            document
+              .getElementById(
+                "bestBeforeText"
+              )
+              .textContent =
+              formatJapaneseDate(
+                date
+              );
+
+          } else {
+
+            selectedUseBy =
+              date;
+
+            document
+              .getElementById(
+                "useByText"
+              )
+              .textContent =
+              formatJapaneseDate(
+                date
+              );
+
+          }
+
+
+          dateModal.classList.add(
+            "hidden"
+          );
+
+        }
+      );
+
+
+
+    /* =========================
+       期限なし
+       ========================= */
+
+    document
+      .getElementById(
+        "clearDate"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          if (
+            editingDateType ===
+            "bestBefore"
+          ) {
+
+            selectedBestBefore =
+              null;
+
+            document
+              .getElementById(
+                "bestBeforeText"
+              )
+              .textContent =
+              "未設定";
+
+          } else {
+
+            selectedUseBy =
+              null;
+
+            document
+              .getElementById(
+                "useByText"
+              )
+              .textContent =
+              "未設定";
+
+          }
+
+
+          dateModal.classList.add(
+            "hidden"
+          );
+
+        }
+      );
+
+
+
+    /* =========================
+       日付文字列
+       ========================= */
+
+    function createDateString(
+      year,
+      month,
+      day
+    ) {
+
+      return (
+        `${year}-` +
+        `${String(month).padStart(2, "0")}-` +
+        `${String(day).padStart(2, "0")}`
+      );
+
+    }
+
+
+
+    function parseDate(
+      dateString
+    ) {
+
+      const [
+        y,
+        m,
+        d
+      ] =
+        dateString
+          .split("-")
+          .map(Number);
+
+
+      return new Date(
+        y,
+        m - 1,
+        d
+      );
+
+    }
+
+
+
+    function formatJapaneseDate(
+      dateString
+    ) {
+
+      const date =
+        parseDate(
+          dateString
+        );
+
+
+      return (
+        `${date.getFullYear()}年` +
+        `${date.getMonth() + 1}月` +
+        `${date.getDate()}日`
+      );
+
+    }
+
+
+
+    /* =========================
+       食品追加
+       ========================= */
+
+    document
+      .getElementById(
+        "addButton"
+      )
       .addEventListener(
         "click",
         async () => {
 
-
           const name =
             document
-              .getElementById("foodName")
+              .getElementById(
+                "foodName"
+              )
               .value
               .trim();
 
@@ -1046,37 +1619,28 @@ const firebaseConfig = {
           const quantity =
             Number(
               document
-                .getElementById("quantity")
+                .getElementById(
+                  "quantity"
+                )
                 .value
             );
 
 
-          const location =
+          const gramsInput =
             document
-              .getElementById("location")
+              .getElementById(
+                "grams"
+              )
               .value;
 
 
-          const bestBefore =
-            document
-              .getElementById("bestBefore")
-              .value;
+          const grams =
+            gramsInput === ""
+              ? null
+              : Number(
+                  gramsInput
+                );
 
-
-          const useBy =
-            document
-              .getElementById("useBy")
-              .value;
-
-
-          const size =
-            document
-              .getElementById("size")
-              .value;
-
-
-
-          // 食品名チェック
 
           if (!name) {
 
@@ -1089,12 +1653,8 @@ const firebaseConfig = {
           }
 
 
-
-          // 個数チェック
-
           if (
-            !quantity ||
-            quantity < 1
+            quantity < 0
           ) {
 
             alert(
@@ -1106,9 +1666,21 @@ const firebaseConfig = {
           }
 
 
+          if (
+            grams !== null &&
+            grams < 0
+          ) {
+
+            alert(
+              "グラム数を正しく入力してください"
+            );
+
+            return;
+
+          }
+
 
           try {
-
 
             await addDoc(
               collection(
@@ -1117,47 +1689,32 @@ const firebaseConfig = {
               ),
               {
 
-
                 name:
                   name,
-
 
                 quantity:
                   quantity,
 
-
-                location:
-                  location,
-
+                grams:
+                  grams,
 
                 bestBefore:
-                  bestBefore ||
-                  null,
-
+                  selectedBestBefore,
 
                 useBy:
-                  useBy ||
-                  null,
-
-
-                size:
-                  size,
-
+                  selectedUseBy,
 
                 addedBy:
                   currentUser,
 
-
                 createdAt:
                   serverTimestamp()
-
 
               }
             );
 
 
-
-            // 入力欄をリセット
+            // リセット
 
             document
               .getElementById(
@@ -1175,30 +1732,44 @@ const firebaseConfig = {
 
             document
               .getElementById(
-                "bestBefore"
+                "grams"
               )
               .value = "";
+
+
+            selectedBestBefore =
+              null;
+
+            selectedUseBy =
+              null;
 
 
             document
               .getElementById(
-                "useBy"
+                "bestBeforeText"
               )
-              .value = "";
+              .textContent =
+              "未設定";
 
+
+            document
+              .getElementById(
+                "useByText"
+              )
+              .textContent =
+              "未設定";
 
 
           } catch (error) {
 
-
-            console.error(error);
-
+            console.error(
+              error
+            );
 
             alert(
               "食品を追加できませんでした。\n\n" +
               error.message
             );
-
 
           }
 
@@ -1207,12 +1778,11 @@ const firebaseConfig = {
 
 
 
-    // =====================================
-    // Firebaseリアルタイム監視
-    // =====================================
+    /* =========================
+       Firestoreリアルタイム同期
+       ========================= */
 
     function startRealtimeListener() {
-
 
       const foodsQuery =
         query(
@@ -1227,19 +1797,16 @@ const firebaseConfig = {
         );
 
 
-
       onSnapshot(
         foodsQuery,
 
         snapshot => {
-
 
           const foods = [];
 
 
           snapshot.forEach(
             document => {
-
 
               foods.push({
 
@@ -1250,588 +1817,333 @@ const firebaseConfig = {
 
               });
 
-
             }
           );
 
 
-
-          renderFoods(foods);
-
+          renderFoods(
+            foods
+          );
 
         },
 
-
         error => {
 
-
-          console.error(error);
-
+          console.error(
+            error
+          );
 
           alert(
             "データを読み込めませんでした。\n\n" +
             error.message
           );
 
-
         }
-
       );
 
     }
 
 
 
-    // =====================================
-    // 食品を表示
-    // =====================================
+    /* =========================
+       食品表示
+       ========================= */
 
-    function renderFoods(foods) {
+    function renderFoods(
+      foods
+    ) {
 
+      const container =
+        document.getElementById(
+          "foods"
+        );
 
-      const containers = {
 
+      container.innerHTML = "";
 
-        "冷蔵室":
-          document.getElementById(
-            "coldFoods"
-          ),
 
+      if (
+        foods.length === 0
+      ) {
 
-        "冷凍室":
-          document.getElementById(
-            "freezerFoods"
-          ),
+        container.innerHTML =
+          `
+          <div class="empty">
+            冷蔵庫に食品がありません
+          </div>
+          `;
 
+        return;
 
-        "野菜室":
-          document.getElementById(
-            "vegetableFoods"
-          )
+      }
 
 
-      };
 
+      foods.forEach(
+        food => {
 
-
-      // 全部クリア
-
-      Object.values(
-        containers
-      ).forEach(
-        container => {
-
-          container.innerHTML = "";
-
-        }
-      );
-
-
-
-      // 充満率
-
-      const used = {
-
-        "冷蔵室": 0,
-
-        "冷凍室": 0,
-
-        "野菜室": 0
-
-      };
-
-
-
-      foods.forEach(food => {
-
-
-        const container =
-          containers[
-            food.location
-          ];
-
-
-        if (!container) return;
-
-
-
-        // =================================
-        // 充満率計算
-        // =================================
-
-        let point = 5;
-
-
-        if (
-          food.size === "medium"
-        ) {
-
-          point = 10;
-
-        }
-
-
-        if (
-          food.size === "large"
-        ) {
-
-          point = 18;
-
-        }
-
-
-        used[
-          food.location
-        ] +=
-          point *
-          (food.quantity || 1);
-
-
-
-        // =================================
-        // 食品カード
-        // =================================
-
-        const div =
-          document.createElement(
-            "div"
-          );
-
-
-        div.className =
-          "food";
-
-
-
-        const info =
-          document.createElement(
-            "div"
-          );
-
-
-
-        const name =
-          document.createElement(
-            "div"
-          );
-
-
-        name.className =
-          "food-name";
-
-
-        name.textContent =
-          `${food.name} × ${food.quantity}`;
-
-
-
-        const detail =
-          document.createElement(
-            "div"
-          );
-
-
-        detail.className =
-          "food-info";
-
-
-
-        // =================================
-        // 期限表示
-        // =================================
-
-        let deadlineText = "";
-
-
-
-        if (food.useBy) {
-
-
-          deadlineText =
-            `消費期限：${formatDate(
-              food.useBy
-            )}`;
-
-
-        } else if (
-          food.bestBefore
-        ) {
-
-
-          deadlineText =
-            `賞味期限：${formatDate(
-              food.bestBefore
-            )}`;
-
-
-        } else {
-
-
-          deadlineText =
-            "期限：未登録";
-
-
-        }
-
-
-
-        detail.textContent =
-          deadlineText;
-
-
-
-        // =================================
-        // 期限チェック
-        // =================================
-
-        const deadline =
-          food.useBy ||
-          food.bestBefore;
-
-
-
-        if (deadline) {
-
-
-          const today =
-            new Date();
-
-
-          today.setHours(
-            0,
-            0,
-            0,
-            0
-          );
-
-
-          const date =
-            new Date(
-              deadline
+          const div =
+            document.createElement(
+              "div"
             );
 
 
-          date.setHours(
-            0,
-            0,
-            0,
-            0
-          );
+          div.className =
+            "food";
 
 
-          const diff =
-            Math.ceil(
-              (
-                date - today
-              )
-              /
-              (
-                1000 *
-                60 *
-                60 *
-                24
-              )
+          const info =
+            document.createElement(
+              "div"
             );
 
 
-
-          if (diff < 0) {
-
-
-            detail.classList.add(
-              "expired"
+          const name =
+            document.createElement(
+              "div"
             );
 
 
-            detail.textContent +=
-              "　⚠️ 期限切れ";
+          name.className =
+            "food-name";
 
 
-          } else if (
-            diff <= 3
+          let quantityText =
+            `個数：${food.quantity ?? 0}個`;
+
+
+          if (
+            food.grams !== null &&
+            food.grams !== undefined
           ) {
 
-
-            detail.classList.add(
-              "warning"
-            );
-
-
-            if (diff === 0) {
-
-
-              detail.textContent +=
-                "　⚠️ 今日まで";
-
-
-            } else {
-
-
-              detail.textContent +=
-                `　⚠️ あと${diff}日`;
-
-
-            }
+            quantityText +=
+              `　${food.grams}g`;
 
           }
 
-        }
+
+          name.textContent =
+            `${food.name}`;
 
 
 
-        // =================================
-        // 追加した人
-        // =================================
-
-        const addedBy =
-          document.createElement(
-            "div"
-          );
+          const detail =
+            document.createElement(
+              "div"
+            );
 
 
-        addedBy.className =
-          "food-info";
+          detail.className =
+            "food-info";
 
 
-        addedBy.textContent =
-          `追加：${food.addedBy || "不明"}`;
+          detail.textContent =
+            quantityText;
 
 
 
-        info.appendChild(
-          name
-        );
+          const deadline =
+            food.useBy ||
+            food.bestBefore;
 
 
-        info.appendChild(
-          detail
-        );
+          if (deadline) {
+
+            const type =
+              food.useBy
+                ? "消費期限"
+                : "賞味期限";
 
 
-        info.appendChild(
-          addedBy
-        );
-
-
-
-        // =================================
-        // 削除ボタン
-        // =================================
-
-        const deleteButton =
-          document.createElement(
-            "button"
-          );
-
-
-        deleteButton.className =
-          "delete";
-
-
-        deleteButton.textContent =
-          "削除";
-
-
-
-        deleteButton.addEventListener(
-          "click",
-          async () => {
-
-
-            const ok =
-              confirm(
-                `${food.name}を削除しますか？`
+            const deadlineDate =
+              parseDate(
+                deadline
               );
 
 
-            if (!ok) return;
+            const today =
+              new Date();
 
 
+            today.setHours(
+              0,
+              0,
+              0,
+              0
+            );
 
-            try {
 
-
-              await deleteDoc(
-                doc(
-                  db,
-                  "foods",
-                  food.id
+            const diff =
+              Math.ceil(
+                (
+                  deadlineDate -
+                  today
+                )
+                /
+                (
+                  1000 *
+                  60 *
+                  60 *
+                  24
                 )
               );
 
 
-            } catch (error) {
-
-
-              console.error(
-                error
+            detail.textContent +=
+              `\n${type}：` +
+              formatJapaneseDate(
+                deadline
               );
 
 
-              alert(
-                "削除できませんでした。\n\n" +
-                error.message
+            if (
+              diff < 0
+            ) {
+
+              detail.classList.add(
+                "expired"
               );
 
+              detail.textContent +=
+                "　⚠️ 期限切れ";
+
+            } else if (
+              diff <= 3
+            ) {
+
+              detail.classList.add(
+                "warning"
+              );
+
+              if (
+                diff === 0
+              ) {
+
+                detail.textContent +=
+                  "　⚠️ 今日まで";
+
+              } else {
+
+                detail.textContent +=
+                  `　⚠️ あと${diff}日`;
+
+              }
 
             }
 
+          } else {
+
+            detail.textContent +=
+              "\n期限：未設定";
+
           }
-        );
 
 
 
-        div.appendChild(
-          info
-        );
-
-
-        div.appendChild(
-          deleteButton
-        );
-
-
-        container.appendChild(
-          div
-        );
-
-
-      });
-
-
-
-      // =================================
-      // 空のとき
-      // =================================
-
-      Object.entries(
-        containers
-      ).forEach(
-        ([location, container]) => {
-
-
-          if (
-            container.children.length === 0
-          ) {
-
-
-            const empty =
-              document.createElement(
-                "div"
-              );
-
-
-            empty.className =
-              "empty";
-
-
-            empty.textContent =
-              "まだ食品がありません";
-
-
-            container.appendChild(
-              empty
+          const addedBy =
+            document.createElement(
+              "div"
             );
 
-          }
+
+          addedBy.className =
+            "food-info";
+
+
+          addedBy.textContent =
+            `追加：${food.addedBy || "不明"}`;
+
+
+
+          info.appendChild(
+            name
+          );
+
+          info.appendChild(
+            detail
+          );
+
+          info.appendChild(
+            addedBy
+          );
+
+
+
+          const deleteButton =
+            document.createElement(
+              "button"
+            );
+
+
+          deleteButton.className =
+            "delete";
+
+
+          deleteButton.textContent =
+            "削除";
+
+
+          deleteButton.addEventListener(
+            "click",
+            async () => {
+
+              if (
+                !confirm(
+                  `${food.name}を削除しますか？`
+                )
+              ) {
+
+                return;
+
+              }
+
+
+              try {
+
+                await deleteDoc(
+                  doc(
+                    db,
+                    "foods",
+                    food.id
+                  )
+                );
+
+              } catch (error) {
+
+                console.error(
+                  error
+                );
+
+                alert(
+                  "削除できませんでした。\n\n" +
+                  error.message
+                );
+
+              }
+
+            }
+          );
+
+
+
+          div.appendChild(
+            info
+          );
+
+          div.appendChild(
+            deleteButton
+          );
+
+
+          container.appendChild(
+            div
+          );
 
         }
       );
 
-
-
-      // =================================
-      // 充満率を更新
-      // =================================
-
-      updateCapacity(
-        "coldRate",
-        "coldBar",
-        used["冷蔵室"]
-      );
-
-
-      updateCapacity(
-        "freezerRate",
-        "freezerBar",
-        used["冷凍室"]
-      );
-
-
-      updateCapacity(
-        "vegetableRate",
-        "vegetableBar",
-        used["野菜室"]
-      );
-
     }
-
-
-
-    // =====================================
-    // 充満率
-    // =====================================
-
-    function updateCapacity(
-      labelId,
-      barId,
-      value
-    ) {
-
-
-      const rate =
-        Math.min(
-          Math.round(value),
-          100
-        );
-
-
-      document
-        .getElementById(
-          labelId
-        )
-        .textContent =
-        `${rate}%`;
-
-
-      document
-        .getElementById(
-          barId
-        )
-        .style.width =
-        `${rate}%`;
-
-    }
-
-
-
-    // =====================================
-    // 日付
-    // =====================================
-
-    function formatDate(
-      dateString
-    ) {
-
-
-      const date =
-        new Date(
-          dateString
-        );
-
-
-      return (
-
-        `${date.getFullYear()}/` +
-
-        `${date.getMonth() + 1}/` +
-
-        `${date.getDate()}`
-
-      );
-
-    }
-
 
   </script>
 
