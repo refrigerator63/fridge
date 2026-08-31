@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>My Fridge</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f7fa;
+      color: #222;
+    }
+
+    header {
+      background: white;
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+    }
+
+    input,
+    select,
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      border: none;
+      background: #222;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.85;
+    }
+
+    .logout {
+      width: auto;
+      padding: 8px 14px;
+      margin: 0;
+      background: #eee;
+      color: #222;
+    }
+
+    .fridge-section {
+      margin-bottom: 30px;
+    }
+
+    .fridge-section h2 {
+      margin-bottom: 10px;
+    }
+
+    .progress {
+      height: 12px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 15px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #222;
+      transition: width 0.3s;
+    }
+
+    .food {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #eee;
+      padding: 14px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .food-name {
+      font-weight: bold;
+      font-size: 17px;
+    }
+
+    .food-info {
+      font-size: 13px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    .delete {
+      width: auto;
+      background: #eee;
+      color: #c00;
+      padding: 8px 12px;
+      margin: 0;
+    }
+
+    .expired {
+      color: #d00;
+      font-weight: bold;
+    }
+
+    .warning {
+      color: #d97706;
+      font-weight: bold;
+    }
+
+    .login {
+      max-width: 400px;
+      margin: 100px auto;
+    }
+
+    #message {
+      color: #d00;
+      margin-bottom: 10px;
+    }
+
+    .capacity-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ログイン画面 -->
+  <div id="loginScreen">
+
+    <div class="card login">
+
+      <h1>🧊 My Fridge</h1>
+
+      <p>家族用冷蔵庫管理システム</p>
+
+      <div id="message"></div>
+
+      <input
+        id="email"
+        type="email"
+        placeholder="メールアドレス"
+      >
+
+      <input
+        id="password"
+        type="password"
+        placeholder="パスワード"
+      >
+
+      <button id="loginButton">
+        ログイン
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- メイン画面 -->
+  <div id="app" class="hidden">
+
+    <header>
+
+      <h1>🧊 My Fridge</h1>
+
+      <button id="logoutButton" class="logout">
+        ログアウト
+      </button>
+
+    </header>
+
+
+    <main>
+
+      <!-- 食品追加 -->
+      <div class="card">
+
+        <h2>＋ 食品を追加</h2>
+
+        <input
+          id="foodName"
+          type="text"
+          placeholder="食品名（例：卵）"
+        >
+
+        <input
+          id="quantity"
+          type="number"
+          min="1"
+          value="1"
+          placeholder="個数"
+        >
+
+        <select id="location">
+
+          <option value="冷蔵室">
+            🧊 冷蔵室
+          </option>
+
+          <option value="冷凍室">
+            ❄️ 冷凍室
+          </option>
+
+          <option value="野菜室">
+            🥬 野菜室
+          </option>
+
+        </select>
+
+
+        <label>
+          賞味期限
+        </label>
+
+        <input
+          id="bestBefore"
+          type="date"
+        >
+
+
+        <label>
+          消費期限
+        </label>
+
+        <input
+          id="useBy"
+          type="date"
+        >
+
+
+        <label>
+          大きさ
+        </label>
+
+        <select id="size">
+
+          <option value="small">
+            小
+          </option>
+
+          <option value="medium">
+            中
+          </option>
+
+          <option value="large">
+            大
+          </option>
+
+        </select>
+
+
+        <button id="addButton">
+          冷蔵庫に追加
+        </button>
+
+      </div>
+
+
+      <!-- 冷蔵室 -->
+      <section class="fridge-section">
+
+        <h2>🧊 冷蔵室</h2>
+
+        <div class="capacity-label">
+          <span>推定充満率</span>
+          <span id="coldRate">0%</span>
+        </div>
+
+        <div class="progress">
+          <div
+            id="coldBar"
+            class="progress-bar"
+            style="width: 0%"
+          ></div>
+        </div>
+
+        <div id="coldFoods"></div>
+
+      </section>
+
+
+      <!-- 冷凍室 -->
+      <section class="fridge-section">
+
+        <h2>❄️ 冷凍室</h2>
+
+        <div class="capacity-label">
+          <span>推定充満率</span>
+          <span id="freezerRate">0%</span>
+        </div>
+
+        <div class="progress">
+          <div
+            id="freezerBar"
+            class="progress-bar"
+            style="width: 0%"
+          ></div>
+        </div>
+
+        <div id="freezerFoods"></div>
+
+      </section>
+
+
+      <!-- 野菜室 -->
+      <section class="fridge-section">
+
+        <h2>🥬 野菜室</h2>
+
+        <div class="capacity-label">
+          <span>推定充満率</span>
+          <span id="vegetableRate">0%</span>
+        </div>
+
+        <div class="progress">
+          <div
+            id="vegetableBar"
+            class="progress-bar"
+            style="width: 0%"
+          ></div>
+        </div>
+
+        <div id="vegetableFoods"></div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- Firebase -->
+  <script type="module">
+
+    import {
+      initializeApp
+    } from
+      "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut
+    } from
+      "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      deleteDoc,
+      doc,
+      onSnapshot,
+      query,
+      orderBy,
+      serverTimestamp
+    } from
+      "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+
+    // ==========================================
+    // Firebase設定
+    // ==========================================
+
+    const firebaseConfig = {
+
+      apiKey: "ここにAPIキー",
+
+      authDomain: "ここにauthDomain",
+
+      projectId: "ここにprojectId",
+
+      storageBucket: "ここにstorageBucket",
+
+      messagingSenderId: "ここにmessagingSenderId",
+
+      appId: "ここにappId"
+
+    };
+
+
+    // Firebase初期化
+
+    const app = initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+
+    const db = getFirestore(app);
+
+
+    // ==========================================
+    // HTML要素
+    // ==========================================
+
+    const loginScreen =
+      document.getElementById("loginScreen");
+
+    const appScreen =
+      document.getElementById("app");
+
+    const message =
+      document.getElementById("message");
+
+
+    // ==========================================
+    // ログイン
+    // ==========================================
+
+    document
+      .getElementById("loginButton")
+      .addEventListener("click", async () => {
+
+        const email =
+          document.getElementById("email").value;
+
+        const password =
+          document.getElementById("password").value;
+
+        message.textContent = "";
+
+        try {
+
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+        } catch (error) {
+
+          console.error(error);
+
+          message.textContent =
+            "ログインできませんでした。メールアドレスとパスワードを確認してください。";
+
+        }
+
+      });
+
+
+    // ==========================================
+    // ログアウト
+    // ==========================================
+
+    document
+      .getElementById("logoutButton")
+      .addEventListener("click", async () => {
+
+        await signOut(auth);
+
+      });
+
+
+    // ==========================================
+    // ログイン状態監視
+    // ==========================================
+
+    onAuthStateChanged(auth, (user) => {
+
+      if (user) {
+
+        loginScreen.classList.add("hidden");
+
+        appScreen.classList.remove("hidden");
+
+        startRealtimeListener();
+
+      } else {
+
+        loginScreen.classList.remove("hidden");
+
+        appScreen.classList.add("hidden");
+
+      }
+
+    });
+
+
+    // ==========================================
+    // 食品追加
+    // ==========================================
+
+    document
+      .getElementById("addButton")
+      .addEventListener("click", async () => {
+
+        const name =
+          document.getElementById("foodName").value.trim();
+
+        const quantity =
+          Number(
+            document.getElementById("quantity").value
+          );
+
+        const location =
+          document.getElementById("location").value;
+
+        const bestBefore =
+          document.getElementById("bestBefore").value;
+
+        const useBy =
+          document.getElementById("useBy").value;
+
+        const size =
+          document.getElementById("size").value;
+
+
+        if (!name) {
+
+          alert("食品名を入力してください");
+
+          return;
+
+        }
+
+
+        try {
+
+          await addDoc(
+            collection(db, "foods"),
+            {
+
+              name: name,
+
+              quantity: quantity,
+
+              location: location,
+
+              bestBefore: bestBefore || null,
+
+              useBy: useBy || null,
+
+              size: size,
+
+              createdAt: serverTimestamp(),
+
+              addedBy: auth.currentUser.email
+
+            }
+          );
+
+
+          // 入力欄をリセット
+
+          document.getElementById("foodName").value = "";
+
+          document.getElementById("quantity").value = 1;
+
+          document.getElementById("bestBefore").value = "";
+
+          document.getElementById("useBy").value = "";
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          alert(
+            "食品を追加できませんでした。\n" +
+            error.message
+          );
+
+        }
+
+      });
+
+
+    // ==========================================
+    // リアルタイム同期
+    // ==========================================
+
+    function startRealtimeListener() {
+
+      const foodsQuery =
+        query(
+          collection(db, "foods"),
+          orderBy("createdAt", "desc")
+        );
+
+
+      onSnapshot(
+        foodsQuery,
+        (snapshot) => {
+
+          const foods = [];
+
+          snapshot.forEach((document) => {
+
+            foods.push({
+
+              id: document.id,
+
+              ...document.data()
+
+            });
+
+          });
+
+
+          renderFoods(foods);
+
+        },
+
+        (error) => {
+
+          console.error(error);
+
+        }
+
+      );
+
+    }
+
+
+    // ==========================================
+    // 食品表示
+    // ==========================================
+
+    function renderFoods(foods) {
+
+      const containers = {
+
+        "冷蔵室":
+          document.getElementById("coldFoods"),
+
+        "冷凍室":
+          document.getElementById("freezerFoods"),
+
+        "野菜室":
+          document.getElementById("vegetableFoods")
+
+      };
+
+
+      // 一旦全部消す
+
+      Object.values(containers).forEach(
+        container => {
+
+          container.innerHTML = "";
+
+        }
+      );
+
+
+      const capacity = {
+
+        "冷蔵室": 100,
+
+        "冷凍室": 100,
+
+        "野菜室": 100
+
+      };
+
+
+      const used = {
+
+        "冷蔵室": 0,
+
+        "冷凍室": 0,
+
+        "野菜室": 0
+
+      };
+
+
+      foods.forEach(food => {
+
+        const container =
+          containers[food.location];
+
+
+        if (!container) return;
+
+
+        // サイズから大体の占有量を計算
+
+        let point = 5;
+
+        if (food.size === "medium") point = 10;
+        if (food.size === "large") point = 18;
+
+
+        used[food.location] +=
+          point * (food.quantity || 1);
+
+
+        const div =
+          document.createElement("div");
+
+        div.className = "food";
+
+
+        const info =
+          document.createElement("div");
+
+
+        const name =
+          document.createElement("div");
+
+        name.className = "food-name";
+
+        name.textContent =
+          `${food.name} × ${food.quantity}`;
+
+
+        const detail =
+          document.createElement("div");
+
+        detail.className = "food-info";
+
+
+        let deadlineText = "";
+
+
+        if (food.useBy) {
+
+          deadlineText =
+            `消費期限：${formatDate(food.useBy)}`;
+
+        } else if (food.bestBefore) {
+
+          deadlineText =
+            `賞味期限：${formatDate(food.bestBefore)}`;
+
+        } else {
+
+          deadlineText =
+            "期限：未登録";
+
+        }
+
+
+        detail.textContent =
+          deadlineText;
+
+
+        // 期限チェック
+
+        const deadline =
+          food.useBy || food.bestBefore;
+
+
+        if (deadline) {
+
+          const today =
+            new Date();
+
+          today.setHours(0, 0, 0, 0);
+
+
+          const date =
+            new Date(deadline);
+
+          date.setHours(0, 0, 0, 0);
+
+
+          const diff =
+            Math.ceil(
+              (date - today)
+              /
+              (1000 * 60 * 60 * 24)
+            );
+
+
+          if (diff < 0) {
+
+            detail.classList.add("expired");
+
+            detail.textContent +=
+              "　⚠️ 期限切れ";
+
+          } else if (diff <= 3) {
+
+            detail.classList.add("warning");
+
+            detail.textContent +=
+              `　⚠️ あと${diff}日`;
+
+          }
+
+        }
+
+
+        info.appendChild(name);
+
+        info.appendChild(detail);
+
+
+        const deleteButton =
+          document.createElement("button");
+
+        deleteButton.className = "delete";
+
+        deleteButton.textContent = "削除";
+
+
+        deleteButton.addEventListener(
+          "click",
+          async () => {
+
+            if (
+              confirm(
+                `${food.name}を削除しますか？`
+              )
+            ) {
+
+              await deleteDoc(
+                doc(
+                  db,
+                  "foods",
+                  food.id
+                )
+              );
+
+            }
+
+          }
+        );
+
+
+        div.appendChild(info);
+
+        div.appendChild(deleteButton);
+
+
+        container.appendChild(div);
+
+      });
+
+
+      // 充満率
+
+      updateCapacity(
+        "coldRate",
+        "coldBar",
+        used["冷蔵室"]
+      );
+
+      updateCapacity(
+        "freezerRate",
+        "freezerBar",
+        used["冷凍室"]
+      );
+
+      updateCapacity(
+        "vegetableRate",
+        "vegetableBar",
+        used["野菜室"]
+      );
+
+    }
+
+
+    // ==========================================
+    // 充満率表示
+    // ==========================================
+
+    function updateCapacity(
+      labelId,
+      barId,
+      value
+    ) {
+
+      const rate =
+        Math.min(
+          Math.round(value),
+          100
+        );
+
+
+      document
+        .getElementById(labelId)
+        .textContent =
+        `${rate}%`;
+
+
+      document
+        .getElementById(barId)
+        .style.width =
+        `${rate}%`;
+
+    }
+
+
+    // ==========================================
+    // 日付表示
+    // ==========================================
+
+    function formatDate(dateString) {
+
+      const date =
+        new Date(dateString);
+
+      return (
+        `${date.getFullYear()}/` +
+        `${date.getMonth() + 1}/` +
+        `${date.getDate()}`
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
